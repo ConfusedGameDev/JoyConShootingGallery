@@ -69,6 +69,10 @@ public class JoyconDemo : MonoBehaviour {
             // Gyro values: x, y, z axis values (in radians per second)
             gyro = j.GetGyro();
 
+			 
+
+
+
             // Accel values:  x, y, z axis values (in Gs)
             accel = j.GetAccel();
 
@@ -81,4 +85,4 @@ public class JoyconDemo : MonoBehaviour {
             gameObject.transform.rotation = orientation;
         }
     }
-}
+} 
