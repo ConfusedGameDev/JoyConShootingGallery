@@ -15,16 +15,23 @@ public class Gun : MonoBehaviour
     public int jc_ind = 0;
     public Quaternion orientation;
     public Quaternion correctedOrientation, rotationOffset;
-    public Transform cannonTip;
+    public Transform cannonTip, target;
     public GameObject bullet;
     public float coolOffTime;
     private bool canShoot;
     private bool startShoot;
+    public LineRenderer BulletFX;
     void Start()
     {
         ammo = maxAmmo;
         TrySetupController();
         canShoot = true;
+        if (BulletFX && cannonTip && target)
+        {
+            BulletFX.SetPosition(0, cannonTip.position);
+            BulletFX.SetPosition(1, cannonTip.position);
+
+        }
     }
     IEnumerator gunCoolOff()
     {
@@ -42,10 +49,32 @@ public class Gun : MonoBehaviour
 
         }
     }
-
-     
+    bool shoot;
+    float delta = 0;
+    public float shootSpeed = 3f;
     void Update()
     {
+        if (BulletFX && cannonTip && target)
+        {
+            BulletFX.SetPosition(0, cannonTip.position);
+
+            if(Input.GetMouseButtonDown(0) && !shoot)
+            {
+                shoot = true;
+            }
+            if (shoot && delta < 1)
+            {
+                BulletFX.SetPosition(1, Vector3.Lerp(cannonTip.position, target.position, delta));
+                delta += Time.deltaTime*shootSpeed;
+                shoot = delta < 1f;
+            }
+            if(!shoot && delta>0)
+            {
+                delta = 0;
+                BulletFX.SetPosition(1, cannonTip.position);
+            }
+        }
+        
         if (joycons.Count > 0)
         {
             Joycon j = joycons[jc_ind];

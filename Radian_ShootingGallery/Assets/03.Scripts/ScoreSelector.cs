@@ -13,6 +13,7 @@ public class ScoreSelector : MonoBehaviour
 
     bool inputMode=true;
     public ScoreManager scoreManager;
+ 
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +23,7 @@ public class ScoreSelector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
 
         if (!nameTextHolder || !scoreTextHolder || !scoreManager) return;
         if (inputMode)
