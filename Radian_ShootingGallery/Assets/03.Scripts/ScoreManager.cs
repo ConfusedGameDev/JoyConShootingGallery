@@ -27,6 +27,16 @@ public class ScoreManager : MonoBehaviour
         }
         
     }
+    public void AddScore(string score, string name)
+    {
+        int scoreINT=0;
+        name = name.Substring(0, 3);
+        if(int.TryParse(score, out scoreINT))
+        {
+            AddScore(scoreINT, name);
+        }
+
+    }
     public void AddScore(int score, string name)
     {
         if(!Directory.Exists(PATH))
